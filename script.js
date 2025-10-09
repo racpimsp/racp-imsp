@@ -1,32 +1,35 @@
 (function(){
   const nav = document.getElementById('site-nav');
   const toggle = document.querySelector('.nav-toggle');
-  const links = document.querySelectorAll('.nav-link');
-
-  // Mobile menu toggle
   toggle?.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
 
-  // Close menu on link click (mobile)
-  links.forEach(a => a.addEventListener('click', () => {
-    if (nav.classList.contains('open')) {
-      nav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-  }));
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, {rootMargin:'-10% 0px -10% 0px', threshold:0.1});
+  reveals.forEach(el=>obs.observe(el));
 
-  // Scroll spy using IntersectionObserver
-  const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-
-  const setActive = id => {
-    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
-
-  sections.forEach(s => observer.observe(s));
+  // Simple counters (data-count)
+  const counters = document.querySelectorAll('[data-count]');
+  const obs2 = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el = e.target;
+        const end = parseInt(el.getAttribute('data-count'),10) || 0;
+        let cur = 0;
+        const step = Math.max(1, Math.floor(end/60));
+        const t = setInterval(()=>{
+          cur += step;
+          if(cur >= end){ cur = end; clearInterval(t); }
+          el.textContent = cur.toString();
+        }, 16);
+        obs2.unobserve(el);
+      }
+    });
+  }, {threshold:0.6});
+  counters.forEach(el=>obs2.observe(el));
 })();
