@@ -1,6 +1,6 @@
 # RACP‑IMSP — Site statique (GitHub Pages)
 
-Pack one‑page sans dépendances, adapté des statuts et du règlement intérieur.
+Pack one‑page sans dépendances, avec bouton d’adhésion (Google Form) et section Documents.
 Placez ces fichiers à la racine du dépôt et activez GitHub Pages (branche `main`, dossier `/ (root)`).
 
 ## Arborescence
@@ -11,8 +11,11 @@ Placez ces fichiers à la racine du dépôt et activez GitHub Pages (branche `ma
   script.js
   /assets/
     logo-racp-imsp.jpg
+  /docs/
+    statuts-racp-imsp.pdf
+    reglement-interieur-racp-imsp.pdf
 ```
 
 ## Personnalisation rapide
-- Remplacez les liens LinkedIn/WhatsApp par vos liens réels (section Contact).
-- Ajoutez d'autres images si besoin dans `/assets` et référencez‑les dans `index.html`.
+- Remplacez `https://forms.gle/your-form-id` par l’URL réelle de votre Google Form (3 endroits dans index.html).
+- Mettez à jour les liens LinkedIn/WhatsApp dans la section Contact.
