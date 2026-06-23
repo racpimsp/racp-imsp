@@ -44,9 +44,7 @@ site/
 ```
 
 > **Droit à l'image.** Les photos contenant des personnes (salle de cours, amphithéâtre)
-> sont utilisées **floutées**, en arrière-plan derrière un voile bleu marine de la charte :
-> aucun visage n'est identifiable. Les fichiers `salle-cours.jpg` et `amphi.jpg` sont déjà
-> traités ainsi. N'utilisez pas les originaux non floutés sans l'accord des personnes.
+> sont utilisées **floutées**, en arrière-plan derrière un voile bleu marine de la charte.
 
 ## 2. Tester en local
 
