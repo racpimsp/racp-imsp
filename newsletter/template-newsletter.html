@@ -1,0 +1,111 @@
+<!doctype html>
+<!--
+  ============================================================================
+  GABARIT NEWSLETTER — RACP-IMSP
+  ----------------------------------------------------------------------------
+  Comment l'utiliser :
+  1. Dupliquez ce fichier pour chaque numéro (ex. newsletter-2026-01.html).
+  2. Remplacez tous les {{CHAMPS}} entre doubles accolades.
+  3. Remplacez VOTRE-DOMAINE par l'adresse réelle du site (pour le logo et les liens).
+  4. Dupliquez/supprimez le bloc « ARTICLE » autant de fois que nécessaire.
+  5. Collez le code dans votre outil d'emailing (Brevo, Mailchimp, Mailjet…) ou
+     envoyez-le via un service qui accepte le HTML.
+  Conçu en tableaux + styles en ligne pour un affichage fiable dans les messageries.
+  ============================================================================
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<title>{{TITRE_DU_NUMERO}}</title>
+</head>
+<body style="margin:0;padding:0;background:#eef3f6;font-family:Arial,Helvetica,sans-serif;color:#15222e;">
+
+<!-- Pré-en-tête (texte d'aperçu dans la boîte de réception) -->
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">{{PHRASE_DACCROCHE_PREHEADER}}</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef3f6;">
+  <tr><td align="center" style="padding:24px 12px;">
+
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:100%;background:#ffffff;border-radius:14px;overflow:hidden;">
+
+      <!-- En-tête -->
+      <tr>
+        <td style="background:#27436F;padding:22px 28px;" align="left">
+          <img src="https://VOTRE-DOMAINE/assets/logo-racp-white.png" alt="RACP-IMSP" height="38" style="height:38px;display:block;border:0;">
+        </td>
+      </tr>
+      <tr><td style="height:4px;background:#00ADEE;line-height:4px;font-size:0;">&nbsp;</td></tr>
+
+      <!-- Titre du numéro -->
+      <tr>
+        <td style="padding:30px 28px 6px;">
+          <p style="margin:0 0 6px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#0073A4;">Newsletter · {{MOIS_ANNEE}}</p>
+          <h1 style="margin:0;font-size:26px;line-height:1.2;color:#27436F;">{{TITRE_DU_NUMERO}}</h1>
+        </td>
+      </tr>
+
+      <!-- Intro -->
+      <tr>
+        <td style="padding:14px 28px 6px;font-size:15px;line-height:1.6;color:#41525f;">
+          {{TEXTE_DINTRODUCTION}}
+        </td>
+      </tr>
+
+      <!-- ===================== BLOC ARTICLE (à dupliquer) ===================== -->
+      <tr>
+        <td style="padding:18px 28px 0;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e3ebf0;border-radius:12px;overflow:hidden;">
+            <tr><td>
+              <img src="https://VOTRE-DOMAINE/assets/img/{{IMAGE_ARTICLE}}" alt="" width="544" style="width:100%;display:block;border:0;">
+            </td></tr>
+            <tr><td style="padding:16px 18px 18px;">
+              <p style="margin:0 0 6px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#0073A4;">{{CATEGORIE_ARTICLE}}</p>
+              <h2 style="margin:0 0 8px;font-size:18px;line-height:1.25;color:#27436F;">{{TITRE_ARTICLE}}</h2>
+              <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#5b6b78;">{{RESUME_ARTICLE}}</p>
+              <a href="{{LIEN_ARTICLE}}" style="display:inline-block;background:#27436F;color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:10px 18px;border-radius:999px;">{{LIBELLE_BOUTON_ARTICLE}}</a>
+            </td></tr>
+          </table>
+        </td>
+      </tr>
+      <!-- ===================== FIN BLOC ARTICLE ===================== -->
+
+      <!-- Encart mentorat (mettre en avant le programme) -->
+      <tr>
+        <td style="padding:22px 28px 0;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f8f8;border-left:4px solid #E0631A;border-radius:10px;">
+            <tr><td style="padding:16px 18px;">
+              <p style="margin:0 0 6px;font-size:16px;font-weight:bold;color:#27436F;">{{TITRE_ENCART}}</p>
+              <p style="margin:0 0 12px;font-size:14px;line-height:1.6;color:#5b6b78;">{{TEXTE_ENCART}}</p>
+              <a href="{{LIEN_ENCART}}" style="display:inline-block;background:#E0631A;color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:10px 18px;border-radius:999px;">{{LIBELLE_BOUTON_ENCART}}</a>
+            </td></tr>
+          </table>
+        </td>
+      </tr>
+
+      <!-- Pied -->
+      <tr>
+        <td style="padding:26px 28px 22px;">
+          <hr style="border:0;border-top:1px solid #e3ebf0;margin:0 0 16px;">
+          <p style="margin:0 0 10px;font-size:13px;color:#5b6b78;">RACP-IMSP — Réseau Alumni des Classes Préparatoires de l'IMSP</p>
+          <p style="margin:0 0 14px;font-size:13px;">
+            <a href="https://www.linkedin.com/in/racp-imsp-41597937b/" style="color:#0073A4;text-decoration:none;">LinkedIn</a> &nbsp;·&nbsp;
+            <a href="https://www.facebook.com/profile.php?id=61579263734893" style="color:#0073A4;text-decoration:none;">Facebook</a> &nbsp;·&nbsp;
+            <a href="https://www.instagram.com/racp_imsp/" style="color:#0073A4;text-decoration:none;">Instagram</a> &nbsp;·&nbsp;
+            <a href="mailto:racp.imsp@gmail.com" style="color:#0073A4;text-decoration:none;">Nous écrire</a>
+          </p>
+          <p style="margin:0;font-size:11px;color:#9aa7b1;">
+            Vous recevez cet e-mail car vous êtes inscrit·e à la newsletter du RACP-IMSP.
+            <a href="{{LIEN_DESINSCRIPTION}}" style="color:#9aa7b1;">Se désinscrire</a>.
+          </p>
+        </td>
+      </tr>
+
+    </table>
+    <p style="margin:14px 0 0;font-size:11px;color:#9aa7b1;">© 2025 RACP-IMSP · Solidarité · Excellence · Rayonnement</p>
+
+  </td></tr>
+</table>
+</body>
+</html>
