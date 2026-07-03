@@ -8,6 +8,9 @@ Déployable tel quel sur **GitHub Pages**, Netlify, Vercel ou tout hébergeur de
 
 ---
 
+> **Sécurité.** Le durcissement appliqué (CSP, anti-XSS de l'espace coordinateur,
+> honeypot des formulaires, en-têtes serveur) est documenté dans **SECURITE.md**.
+
 ## 1. Contenu du dossier
 
 ```

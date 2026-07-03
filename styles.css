@@ -603,3 +603,236 @@ a.card-link:hover .card-arrow{gap:.6rem}
 
 /* Confirmation du formulaire de contact */
 .contact-done{color:var(--ok);font-weight:600;margin-top:.6rem}
+
+/* =====================================================================
+   V3 — COUCHE DYNAMIQUE & ESTHÉTIQUE
+   Renforcement visuel de l'ensemble des pages : en-tête réactif,
+   barre de progression, micro-interactions, halos, cascades.
+   Toutes les animations respectent prefers-reduced-motion (fin de bloc).
+   ===================================================================== */
+
+/* ---------- Entrée de page en douceur ---------- */
+html.js body{animation:pageIn .5s ease both}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+
+/* ---------- Barre de progression de lecture ---------- */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:1200;
+  background:linear-gradient(90deg,var(--cyan),var(--blue) 55%,var(--orange));
+  transform:scaleX(0);transform-origin:left;pointer-events:none}
+
+/* ---------- En-tête réactif au défilement ---------- */
+.site-header{transition:box-shadow .25s ease,background .25s ease}
+.site-header.scrolled{background:rgba(255,255,255,.97);box-shadow:0 6px 24px rgba(16,35,56,.1)}
+.site-header.scrolled .nav-wrap{min-height:62px}
+.nav-wrap{transition:min-height .25s ease}
+.logo img{transition:transform .25s ease}
+.logo:hover img{transform:scale(1.05) rotate(-2deg)}
+
+/* Liens de navigation : soulignement animé */
+.nav-link::before{content:"";position:absolute;left:.7rem;right:.7rem;bottom:.28rem;height:2px;
+  background:var(--cyan);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav-link:hover::before{transform:scaleX(1)}
+.nav-link.active::before{display:none}
+
+/* ---------- Boutons : reflet balayant + élévation ---------- */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:skewX(-20deg);transition:left .45s ease;pointer-events:none}
+.btn:hover::after{left:130%}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(224,99,26,.4)}
+.btn-secondary:hover,.btn-outline:hover{transform:translateY(-2px)}
+.btn-ghost-light:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.25)}
+
+/* ---------- Hero : halo animé + titre irisé ---------- */
+.hero::after{content:"";position:absolute;inset:-20%;pointer-events:none;opacity:.5;
+  background:
+    radial-gradient(420px 320px at 20% 30%, rgba(0,173,238,.22), transparent 65%),
+    radial-gradient(520px 380px at 80% 70%, rgba(224,99,26,.10), transparent 65%);
+  animation:heroAurora 16s ease-in-out infinite alternate}
+@keyframes heroAurora{from{transform:translate3d(-2%,-2%,0) scale(1)}to{transform:translate3d(3%,3%,0) scale(1.06)}}
+.hero-inner{z-index:1}
+.hero h1 .hl{background:linear-gradient(90deg,#7fd3f4,#00ADEE,#7fd3f4);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:hlShift 6s ease-in-out infinite}
+@keyframes hlShift{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+.hero-figure{transition:transform .5s ease,box-shadow .5s ease}
+.hero-figure:hover{transform:translateY(-4px);box-shadow:0 40px 80px rgba(0,0,0,.55)}
+
+/* ---------- Cartes : élévation, liseré lumineux, spotlight curseur ---------- */
+.card,.res,.quote{position:relative;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.card::before,.res::before,.quote::before{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(0,173,238,.10),transparent 65%);
+  opacity:0;transition:opacity .3s ease;pointer-events:none}
+.card:hover,.res:hover,.quote:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(0,173,238,.45)}
+.card:hover::before,.res:hover::before,.quote:hover::before{opacity:1}
+.card-link .card-arrow{display:inline-flex;align-items:center;gap:.3rem;margin-top:1rem;
+  font-weight:600;color:var(--cyan-700);transition:gap .2s ease,color .2s ease}
+.card-link:hover .card-arrow{gap:.65rem;color:var(--orange)}
+.card.accent{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,border-top-color .25s ease}
+.card.accent:hover{border-top-color:var(--orange)}
+.card .ic{transition:transform .25s ease,background .25s ease}
+.card:hover .ic{transform:scale(1.1) rotate(-4deg);background:rgba(0,173,238,.18)}
+
+/* ---------- Étapes numérotées : cercle qui s'illumine ---------- */
+.step .n{transition:background .25s ease,color .25s ease,transform .25s ease,border-color .25s ease}
+.step:hover .n{background:var(--cyan);border-color:var(--cyan);color:#fff;transform:scale(1.08)}
+.navy-band .step:hover .n{background:#7fd3f4;border-color:#7fd3f4;color:var(--ink)}
+
+/* ---------- Images des sections : zoom feutré ---------- */
+.split .media{overflow:hidden;border-radius:var(--r)}
+.split .media img{transition:transform .6s ease}
+.split .media:hover img{transform:scale(1.04)}
+
+/* ---------- Galerie : légende qui se soulève ---------- */
+.gallery figcaption{transform:translateY(6px);opacity:.92;transition:transform .35s ease,opacity .35s ease}
+.gallery figure:hover figcaption{transform:none;opacity:1}
+.gallery figure{transition:box-shadow .3s ease,transform .3s ease}
+.gallery figure:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+
+/* ---------- Titres de section : trait d'accent ---------- */
+h2.title{position:relative;padding-bottom:.55rem}
+h2.title::after{content:"";position:absolute;left:0;bottom:0;width:46px;height:3px;border-radius:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--orange))}
+.section-head.center h2.title::after{left:50%;transform:translateX(-50%)}
+.navy-band h2.title::after{background:linear-gradient(90deg,#7fd3f4,var(--orange))}
+.cta-band h2{padding-bottom:0}.cta-band h2::after{display:none}
+
+/* ---------- FAQ : survol + ouverture animée ---------- */
+.faq details{transition:background .2s ease}
+.faq details:hover{background:var(--paper)}
+.faq details[open] .a{animation:faqOpen .3s ease both}
+@keyframes faqOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* ---------- Bandeau CTA photo : voile respirant ---------- */
+.cta-band.photo{background-size:cover;background-position:center;isolation:isolate}
+.cta-band.photo::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(135deg,rgba(22,38,63,.88),rgba(31,53,86,.82))}
+.cta-band{transition:box-shadow .3s ease}
+.cta-band:hover{box-shadow:0 24px 60px rgba(16,35,56,.25)}
+
+/* ---------- Pied de page : liens réactifs ---------- */
+.site-footer a{transition:color .2s ease,transform .2s ease}
+.foot-soc a{transition:transform .2s ease,background .2s ease,color .2s ease}
+.foot-soc a:hover{transform:translateY(-3px)}
+
+/* ---------- Bouton retour en haut : plus visible ---------- */
+.to-top{box-shadow:0 10px 26px rgba(16,35,56,.35);transition:opacity .25s ease,transform .25s ease,background .2s ease}
+.to-top:hover{transform:translateY(-3px)}
+
+/* ---------- Message d'état des formulaires (remplace alert) ---------- */
+.form-alert{display:none;margin:.8rem 0 0;padding:.7rem 1rem;border-radius:10px;font-size:.92rem;font-weight:500}
+.form-alert.show{display:block;animation:faqOpen .25s ease both}
+.form-alert[data-kind="error"]{background:rgba(224,99,26,.1);color:var(--orange-700);border:1px solid rgba(224,99,26,.3)}
+.form-alert[data-kind="ok"]{background:rgba(31,157,107,.1);color:var(--ok);border:1px solid rgba(31,157,107,.3)}
+input[aria-invalid="true"]{border-color:var(--orange) !important}
+
+/* ---------- Chips de la bibliothèque : rebond léger ---------- */
+.chip,.catchip{transition:transform .15s ease,background .2s ease,color .2s ease,border-color .2s ease}
+.chip:hover,.catchip:hover{transform:translateY(-2px)}
+.chip:active,.catchip:active{transform:translateY(0)}
+
+/* ---------- Tableaux : ligne survolée ---------- */
+tbody tr{transition:background .15s ease}
+tbody tr:hover{background:var(--paper)}
+
+/* ---------- Accessibilité : réduction de mouvement ---------- */
+@media (prefers-reduced-motion: reduce){
+  html.js body{animation:none}
+  .hero::after,.hero h1 .hl,.hero-net circle,.hero-net g[stroke] line{animation:none !important}
+  .btn::after{display:none}
+  .card,.res,.quote,.btn,.gallery figure,.hero-figure,.step .n,.split .media img,
+  .gallery img,.chip,.catchip,.to-top,.foot-soc a,.logo img{transition:none !important;transform:none !important}
+  .scroll-progress{display:none}
+}
+
+/* =====================================================================
+   V4 — BLOCS COLORÉS
+   Cartes "Choisissez votre rôle" en couleurs + déclinaison des
+   couleurs de la charte sur les grilles de cartes de tout le site.
+   ===================================================================== */
+
+/* ---------- Choisissez votre rôle : deux grandes cartes colorées ---------- */
+.role-pick{max-width:860px}
+.role-pick a{position:relative;overflow:hidden;border-width:1.5px;padding:1.8rem 1.7rem;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.role-pick a::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s ease;z-index:0}
+.role-pick a>*{position:relative;z-index:1}
+.role-pick a:hover{transform:translateY(-5px)}
+.role-pick h3{display:flex;align-items:center;gap:.4rem;transition:color .25s ease}
+.role-pick p{transition:color .25s ease}
+.role-arrow{transition:transform .22s ease}
+.role-pick a:hover .role-arrow{transform:translateX(6px)}
+.role-badge{display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;
+  text-transform:uppercase;padding:.28rem .7rem;border-radius:999px;margin-bottom:.9rem;
+  transition:background .25s ease,color .25s ease}
+
+/* Parrain — orange (celles et ceux qui transmettent) */
+.role-pick .role-parrain{background:linear-gradient(160deg,rgba(224,99,26,.14),rgba(224,99,26,.04) 55%,#fff);
+  border-color:rgba(224,99,26,.45) !important}
+.role-pick .role-parrain h3{color:var(--orange-700)}
+.role-pick .role-parrain .role-badge{background:rgba(224,99,26,.14);color:var(--orange-700)}
+.role-pick .role-parrain::after{background:linear-gradient(160deg,var(--orange),var(--orange-700))}
+.role-pick .role-parrain:hover{border-color:var(--orange) !important;box-shadow:0 18px 40px rgba(224,99,26,.32)}
+.role-pick .role-parrain:hover::after{opacity:1}
+.role-pick .role-parrain:hover h3,.role-pick .role-parrain:hover p{color:#fff}
+.role-pick .role-parrain:hover .role-badge{background:rgba(255,255,255,.2);color:#fff}
+
+/* Filleul·e — cyan (celles et ceux qui sont guidés) */
+.role-pick .role-filleul{background:linear-gradient(160deg,rgba(0,173,238,.14),rgba(0,173,238,.04) 55%,#fff);
+  border-color:rgba(0,173,238,.5) !important}
+.role-pick .role-filleul h3{color:var(--cyan-700)}
+.role-pick .role-filleul .role-badge{background:rgba(0,173,238,.14);color:var(--cyan-700)}
+.role-pick .role-filleul::after{background:linear-gradient(160deg,var(--cyan),var(--cyan-700))}
+.role-pick .role-filleul:hover{border-color:var(--cyan) !important;box-shadow:0 18px 40px rgba(0,115,164,.32)}
+.role-pick .role-filleul:hover::after{opacity:1}
+.role-pick .role-filleul:hover h3,.role-pick .role-filleul:hover p{color:#fff}
+.role-pick .role-filleul:hover .role-badge{background:rgba(255,255,255,.22);color:#fff}
+
+/* ---------- Grilles de cartes : rotation des couleurs de la charte ----------
+   1re carte : cyan · 2e : bleu médian · 3e : orange (puis navy en 4e).
+   S'applique aux piliers de l'accueil, activités, actualités, adhésion,
+   phases du mentorat… partout où des cartes se ressemblent. */
+.grid > .card:nth-child(3n+1),
+.grid > .card:nth-child(3n+1).accent{border-top:3px solid var(--cyan);
+  background:linear-gradient(180deg,rgba(0,173,238,.07),#fff 46%)}
+.grid > .card:nth-child(3n+2),
+.grid > .card:nth-child(3n+2).accent{border-top:3px solid var(--blue);
+  background:linear-gradient(180deg,rgba(0,115,164,.07),#fff 46%)}
+.grid > .card:nth-child(3n),
+.grid > .card:nth-child(3n).accent{border-top:3px solid var(--orange);
+  background:linear-gradient(180deg,rgba(224,99,26,.07),#fff 46%)}
+
+/* icônes et numéros accordés à la couleur de la carte */
+.grid > .card:nth-child(3n+1) .ic{background:rgba(0,173,238,.12);color:var(--cyan-700)}
+.grid > .card:nth-child(3n+2) .ic{background:rgba(0,115,164,.12);color:var(--blue)}
+.grid > .card:nth-child(3n) .ic{background:rgba(224,99,26,.12);color:var(--orange-700)}
+.grid > .card:nth-child(3n+2) .pillar-n{color:var(--blue)}
+.grid > .card:nth-child(3n) .pillar-n{color:var(--orange-700)}
+.grid > .card:nth-child(3n) .card-arrow{color:var(--orange-700)}
+
+/* grilles de 4 (phases du mentorat) : la 4e reprend le navy */
+.grid.g-4 > .card:nth-child(4n){border-top-color:var(--navy);
+  background:linear-gradient(180deg,rgba(39,67,111,.08),#fff 46%)}
+.grid.g-4 > .card:nth-child(4n) .pillar-n{color:var(--navy)}
+
+/* survol : le liseré s'épaissit visuellement via une ombre colorée */
+.grid > .card:nth-child(3n+1):hover{border-color:var(--cyan);box-shadow:0 14px 34px rgba(0,173,238,.18)}
+.grid > .card:nth-child(3n+2):hover{border-color:var(--blue);box-shadow:0 14px 34px rgba(0,115,164,.18)}
+.grid > .card:nth-child(3n):hover{border-color:var(--orange);box-shadow:0 14px 34px rgba(224,99,26,.18)}
+.grid.g-4 > .card:nth-child(4n):hover{border-color:var(--navy);box-shadow:0 14px 34px rgba(39,67,111,.2)}
+
+/* ---------- Posture du mentor : vert (rôle) / orange (hors champ) ---------- */
+.posture .card:first-child{border-left:4px solid var(--ok);
+  background:linear-gradient(160deg,rgba(31,157,107,.08),#fff 50%)}
+.posture .card:first-child:hover{border-color:var(--ok);box-shadow:0 14px 34px rgba(31,157,107,.18)}
+.posture .card:last-child{border-left:4px solid var(--orange);
+  background:linear-gradient(160deg,rgba(224,99,26,.08),#fff 50%)}
+.posture .card:last-child:hover{border-color:var(--orange);box-shadow:0 14px 34px rgba(224,99,26,.18)}
+
+/* la section déplacée en haut de page respire un peu moins */
+.role-choice{padding:3.4rem 0 3.8rem}
+
+@media (prefers-reduced-motion: reduce){
+  .role-pick a,.role-pick a::after,.role-arrow,.role-badge{transition:none !important;transform:none !important}
+}

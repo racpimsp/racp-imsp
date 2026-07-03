@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Espace coordinateur — RACP-IMSP</title>
 <meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <link rel="icon" href="../assets/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -88,6 +91,16 @@ tbody tr:hover{background:var(--paper)}
 .login-box p{color:var(--muted);font-size:.92rem}
 .login-box input{width:100%;padding:.7rem .9rem;border:1.5px solid var(--line2);border-radius:9px;margin:.8rem 0;font-family:var(--body)}
 .hide{display:none !important}
+/* V2 — micro-interactions */
+.stat{transition:transform .2s ease,box-shadow .2s ease}
+.stat:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(16,35,56,.12)}
+.appcard{transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.appcard:hover{transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 8px 20px rgba(16,35,56,.1)}
+.navbtn{transition:background .15s ease,color .15s ease}
+.view.active{animation:viewIn .25s ease both}
+@keyframes viewIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.funnel-bar{transition:width .6s ease}
+@media (prefers-reduced-motion: reduce){.stat,.appcard,.navbtn{transition:none}.view.active{animation:none}}
 @media(max-width:820px){.app{grid-template-columns:1fr}.side{flex-direction:row;flex-wrap:wrap;align-items:center}.side .foot{display:none}.stats{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -102,6 +115,7 @@ tbody tr:hover{background:var(--paper)}
     <input type="email" id="login-email" placeholder="votre@email.org">
     <button class="btn btn-p" style="width:100%" id="login-btn">Recevoir le lien de connexion</button>
     <p style="margin-top:1.2rem;font-size:.84rem">— ou —</p>
+    <p id="login-msg" role="status" style="min-height:1.2em;font-size:.84rem;color:var(--warn);margin:.2rem 0 .6rem"></p>
     <button class="btn btn-o" style="width:100%" id="demo-btn">Entrer en mode démonstration</button>
     <p style="margin-top:1rem;font-size:.74rem;color:var(--muted2)">Le mode démo utilise des données fictives, sans connexion à la base.</p>
   </div>
@@ -164,210 +178,6 @@ tbody tr:hover{background:var(--paper)}
 </div>
 
 <script src="../assets/supabase-config.js"></script>
-<script>
-/* ===================================================================
-   CONFIG SUPABASE — renseignez assets/supabase-config.js (recommandé)
-   ou, à défaut, les deux valeurs ci-dessous. Vide = mode démonstration.
-   =================================================================== */
-const SUPABASE_URL  = (window.RACP_SUPABASE && window.RACP_SUPABASE.url)  || "";
-const SUPABASE_ANON = (window.RACP_SUPABASE && window.RACP_SUPABASE.anon) || "";
-
-const ETAPES = ["soumise","en_revue","presentation_planifiee","engagement_valide","onboarde","en_attente_binome","jumele","actif","cloture"];
-const ETAPE_LABEL = {soumise:"Soumise",en_revue:"En revue",presentation_planifiee:"Présentation",engagement_valide:"Engagement validé",onboarde:"Onboardé",en_attente_binome:"En attente binôme",jumele:"Jumelé",actif:"Actif",cloture:"Clôturé"};
-
-/* ---- Données de démonstration ---- */
-const DEMO = {
-  apps: [
-    {id:1,nom:"Koffi A.",role:"mentor",exp:"Data / IA",dispo:2,pays:"France",etape:"en_revue"},
-    {id:2,nom:"Awa B.",role:"filleul",filiere:"MP → ingénierie",dispo:1,pays:"Bénin",etape:"soumise"},
-    {id:3,nom:"Sékou D.",role:"mentor",exp:"Génie civil",dispo:1,pays:"Maroc",etape:"engagement_valide"},
-    {id:4,nom:"Fatou N.",role:"filleul",filiere:"PC → chimie",dispo:1,pays:"Bénin",etape:"en_attente_binome"},
-    {id:5,nom:"Yao K.",role:"mentor",exp:"Recherche / physique",dispo:2,pays:"Bénin",etape:"onboarde"},
-    {id:6,nom:"Inès T.",role:"filleul",filiere:"MP → data",dispo:2,pays:"Bénin",etape:"en_attente_binome"},
-    {id:7,nom:"Moussa S.",role:"mentor",exp:"Finance / stats",dispo:1,pays:"France",etape:"presentation_planifiee"},
-    {id:8,nom:"Léa P.",role:"filleul",filiere:"PSI → énergie",dispo:1,pays:"Bénin",etape:"soumise"},
-  ],
-  pairs: [
-    {id:1,mentor:"Aïcha M.",mentee:"Rachid O.",referent:"Coordination",statut:"actif",last:"il y a 8 j"},
-    {id:2,mentor:"Jean B.",mentee:"Sara K.",referent:"Coordination",statut:"actif",last:"il y a 21 j"},
-    {id:3,mentor:"Paul E.",mentee:"Nadia F.",referent:"Coordination",statut:"pause",last:"il y a 40 j"},
-  ],
-  members: [
-    {nom:"Aïcha M.",promo:"MP 2018",role:"mentor",pays:"France"},
-    {nom:"Jean B.",promo:"PC 2016",role:"mentor",pays:"Bénin"},
-    {nom:"Rachid O.",promo:"MP 2025",role:"filleul",pays:"Bénin"},
-    {nom:"Sara K.",promo:"PSI 2025",role:"filleul",pays:"Bénin"},
-    {nom:"Paul E.",promo:"MP 2014",role:"mentor",pays:"Canada"},
-  ],
-};
-
-let DB = null, sb = null, isDemo = true, state = {apps:[],pairs:[],members:[]};
-
-/* ---- Data layer (Supabase si configuré, sinon démo) ---- */
-async function loadData(){
-  if(SUPABASE_URL && SUPABASE_ANON){
-    try{
-      const m = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");
-      sb = m.createClient(SUPABASE_URL, SUPABASE_ANON);
-      isDemo = false;
-      const [ma,fa,pr,pf] = await Promise.all([
-        sb.from("mentor_applications").select("*"),
-        sb.from("mentee_applications").select("*"),
-        sb.from("pairings").select("*"),
-        sb.from("profiles").select("*"),
-      ]);
-      state.apps = [].concat(
-        (ma.data||[]).map(x=>({...x, role:"mentor",
-          nom: ((x.prenom||"")+" "+(x.nom||"")).trim() || ("#"+x.id),
-          exp: x.expertise || "",
-          filiere: x.filiere || "",
-          dispo: parseInt(x.dispo_h,10) || 1 })),
-        (fa.data||[]).map(x=>({...x, role:"filleul",
-          nom: ((x.prenom||"")+" "+(x.nom||"")).trim() || ("#"+x.id),
-          filiere: x.filiere_visee || x.filiere || "",
-          dispo: parseInt(x.dispo,10) || 1 })));
-      state.pairs = pr.data||[];
-      state.members = pf.data||[];
-      return;
-    }catch(e){ console.warn("Supabase indisponible, bascule en démo", e); }
-  }
-  isDemo = true;
-  state.apps = JSON.parse(JSON.stringify(DEMO.apps));
-  state.pairs = JSON.parse(JSON.stringify(DEMO.pairs));
-  state.members = JSON.parse(JSON.stringify(DEMO.members));
-}
-
-/* ---- Rendu ---- */
-function renderDash(){
-  const a=state.apps;
-  const pending=a.filter(x=>!["actif","cloture","jumele"].includes(x.etape)).length;
-  const mentors=a.filter(x=>x.role==="mentor").length;
-  const filleuls=a.filter(x=>x.role==="filleul").length;
-  const activePairs=state.pairs.filter(p=>p.statut==="actif").length;
-  document.getElementById("dash-stats").innerHTML = [
-    ["Candidatures en cours",pending],["Binômes actifs",activePairs],["Mentors",mentors],["Filleul·e·s",filleuls]
-  ].map(([l,n])=>`<div class="stat accent"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
-  // funnel
-  const counts=ETAPES.map(e=>({e,n:a.filter(x=>x.etape===e).length}));
-  const max=Math.max(1,...counts.map(c=>c.n));
-  document.getElementById("dash-funnel").innerHTML = counts.map(c=>`
-    <div style="display:flex;align-items:center;gap:1rem;margin:.4rem 0">
-      <div style="width:150px;font-size:.82rem;color:var(--muted)">${ETAPE_LABEL[c.e]}</div>
-      <div style="flex:1;background:var(--paper);border-radius:8px;overflow:hidden;height:22px">
-        <div style="width:${Math.round(c.n/max*100)}%;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));min-width:${c.n?'8px':'0'}"></div></div>
-      <div style="font-family:var(--mono);font-size:.8rem;width:24px;text-align:right">${c.n}</div>
-    </div>`).join("");
-}
-
-function renderKanban(){
-  const k=document.getElementById("kanban");
-  k.innerHTML = ETAPES.map(e=>{
-    const items=state.apps.filter(x=>x.etape===e);
-    return `<div class="col"><div class="col-h"><b>${ETAPE_LABEL[e]}</b><span class="cnt">${items.length}</span></div>
-      <div class="col-body">${items.map(appCard).join("")||'<p style="color:var(--muted2);font-size:.8rem;padding:.4rem">—</p>'}</div></div>`;
-  }).join("");
-  k.querySelectorAll("select[data-id]").forEach(s=>s.addEventListener("change",async()=>{
-    const app=state.apps.find(x=>x.id==s.dataset.id); app.etape=s.value;
-    if(!isDemo && sb){ const tbl=app.role==="mentor"?"mentor_applications":"mentee_applications"; await sb.from(tbl).update({etape:s.value}).eq("id",app.id); }
-    renderKanban(); renderDash();
-  }));
-}
-function appCard(a){
-  return `<div class="appcard"><div><span class="nm">${a.nom}</span><span class="role ${a.role}">${a.role}</span></div>
-    <div class="meta">${a.role==="mentor"?(a.exp||""):(a.filiere||"")} · ${a.pays||""}</div>
-    <select data-id="${a.id}">${ETAPES.map(e=>`<option value="${e}" ${e===a.etape?"selected":""}>${ETAPE_LABEL[e]}</option>`).join("")}</select></div>`;
-}
-
-function renderBino(){
-  const t=document.getElementById("bino-table");
-  t.innerHTML = `<thead><tr><th>Mentor</th><th>Filleul·e</th><th>Référent</th><th>Statut</th><th>Dernière session</th></tr></thead>
-   <tbody>${state.pairs.map(p=>`<tr><td><b>${p.mentor||p.mentor_id}</b></td><td>${p.mentee||p.mentee_id}</td><td>${p.referent||"—"}</td>
-   <td><span class="pill ${p.statut}">${p.statut}</span></td><td style="color:var(--muted)">${p.last||"—"}</td></tr>`).join("")}</tbody>`;
-}
-function renderMemb(){
-  const t=document.getElementById("memb-table");
-  t.innerHTML = `<thead><tr><th>Nom</th><th>Promotion</th><th>Rôle</th><th>Pays</th></tr></thead>
-   <tbody>${state.members.map(m=>`<tr><td><b>${m.nom}</b></td><td>${m.promo||m.promotion||"—"}</td><td>${m.role||"membre"}</td><td>${m.pays||"—"}</td></tr>`).join("")}</tbody>`;
-}
-
-/* ---- Matching ---- */
-function openPair(){
-  const mentees=state.apps.filter(a=>a.role==="filleul"&&a.etape==="en_attente_binome");
-  const mentors=state.apps.filter(a=>a.role==="mentor");
-  const ms=document.getElementById("pick-mentee"), mt=document.getElementById("pick-mentor");
-  ms.innerHTML=mentees.map(m=>`<option value="${m.id}">${m.nom} — ${m.filiere||""}</option>`).join("")||"<option>Aucun·e en attente</option>";
-  mt.innerHTML=mentors.map(m=>`<option value="${m.id}">${m.nom} — ${m.exp||""}</option>`).join("");
-  ms.onchange=suggest; suggest();
-  document.getElementById("pair-modal").classList.add("open");
-}
-function suggest(){
-  const mid=document.getElementById("pick-mentee").value;
-  const mentee=state.apps.find(a=>a.id==mid); if(!mentee){return;}
-  const kw=(mentee.filiere||"").toLowerCase();
-  const mentors=state.apps.filter(a=>a.role==="mentor");
-  const scored=mentors.map(m=>{let s=0; const e=(m.exp||"").toLowerCase();
-    if(kw.includes("data")&&e.includes("data"))s+=2; if(kw.includes("physique")&&e.includes("physique"))s+=2;
-    if(kw.includes("chimie")&&e.includes("chimie"))s+=2; if(m.pays===mentee.pays)s+=1; if(m.dispo>=mentee.dispo)s+=1; return {m,s};})
-    .sort((a,b)=>b.s-a.s);
-  const best=scored[0];
-  if(best){document.getElementById("pick-mentor").value=best.m.id;
-    document.getElementById("pair-suggest").innerHTML=`Suggestion : <b>${best.m.nom}</b> (${best.m.exp}) — compatibilité sur le domaine, la disponibilité et le fuseau.`;}
-}
-async function createPair(){
-  const mentee=state.apps.find(a=>a.id==document.getElementById("pick-mentee").value);
-  const mentor=state.apps.find(a=>a.id==document.getElementById("pick-mentor").value);
-  if(!mentee||!mentor)return;
-  state.pairs.unshift({id:Date.now(),mentor:mentor.nom,mentee:mentee.nom,referent:"Coordination",statut:"actif",last:"à l'instant"});
-  mentee.etape="jumele"; mentor.etape="actif";
-  if(!isDemo && sb){ await sb.from("pairings").insert({mentor_id:mentor.id,mentee_id:mentee.id,statut:"actif"}); }
-  document.getElementById("pair-modal").classList.remove("open");
-  renderBino(); renderKanban(); renderDash();
-}
-
-/* ---- Navigation ---- */
-function show(view){
-  document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
-  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id==="view-"+view));
-  const titles={dash:"Tableau de bord",cand:"Candidatures",bino:"Binômes",memb:"Membres"};
-  document.getElementById("view-title").textContent=titles[view];
-}
-document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
-
-async function start(demo){
-  if(demo){ /* force demo even if config present */ }
-  await loadData();
-  document.getElementById("login").classList.add("hide");
-  document.getElementById("app").classList.remove("hide");
-  document.getElementById("mode-badge").style.display = isDemo ? "" : "none";
-  document.getElementById("who-email").textContent = isDemo ? "démo" : (document.getElementById("login-email").value||"coordinateur");
-  renderDash(); renderKanban(); renderBino(); renderMemb();
-}
-document.getElementById("demo-btn").addEventListener("click",()=>start(true));
-document.getElementById("login-btn").addEventListener("click",async()=>{
-  const email=document.getElementById("login-email").value.trim();
-  if(SUPABASE_URL && SUPABASE_ANON && email){
-    try{ const m=await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");
-      const c=m.createClient(SUPABASE_URL,SUPABASE_ANON);
-      await c.auth.signInWithOtp({email}); alert("Lien de connexion envoyé à "+email); return;
-    }catch(e){ alert("Connexion impossible. "+e.message); return; }
-  }
-  alert("Supabase n'est pas configuré. Utilisez le mode démonstration, ou renseignez SUPABASE_URL et SUPABASE_ANON dans ce fichier.");
-});
-document.getElementById("logout").addEventListener("click",()=>location.reload());
-document.getElementById("new-pair").addEventListener("click",openPair);
-document.getElementById("pair-cancel").addEventListener("click",()=>document.getElementById("pair-modal").classList.remove("open"));
-document.getElementById("pair-create").addEventListener("click",createPair);
-
-/* Retour via le lien magique : si une session est déjà ouverte, on entre directement. */
-(async function restoreSession(){
-  if(!(SUPABASE_URL && SUPABASE_ANON)) return;
-  try{
-    const m = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");
-    const c = m.createClient(SUPABASE_URL, SUPABASE_ANON);
-    const { data:{ session } } = await c.auth.getSession();
-    if(session) start(false);
-  }catch(e){ /* pas de session, on reste sur l'écran de connexion */ }
-})();
-</script>
+<script src="app.js" defer></script>
 </body>
 </html>
