@@ -1,0 +1,30 @@
+# === Système / OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# === Éditeurs / IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === Logs & temporaires ===
+*.log
+*.tmp
+.cache/
+tmp/
+
+# === Dépendances (si un outillage Node est ajouté un jour) ===
+node_modules/
+package-lock.json
+
+# === Variables d'environnement / secrets ===
+.env
+.env.*
+!.env.example
+
+# === Images générées (ex. essais WebP) ===
+assets/img/*.webp

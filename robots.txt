@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
-Sitemap: https://VOTRE-DOMAINE/sitemap.xml
+Disallow: /docs/
+Sitemap: https://racp-imsp.org/sitemap.xml
