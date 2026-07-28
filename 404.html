@@ -1,19 +1,92 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-tHd4qJ0R/vQfI0CbRTiL3XGSi+Tun7VhOcDbx08aLKA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://*.supabase.co https://cdn.jsdelivr.net; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io https://docs.google.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Page introuvable — RACP-IMSP</title>
+<meta name="description" content="La page demandée est introuvable. Retrouvez le réseau, le mentorat, les ressources et les actualités du RACP-IMSP.">
+<meta name="robots" content="noindex, follow">
 <link rel="icon" href="assets/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css"><script>document.documentElement.className+=" js";</script>
+<meta name="theme-color" content="#27436F">
+<link rel="apple-touch-icon" href="assets/logo-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.className+=" js";</script>
 </head>
 <body>
-<section class="hero" style="min-height:70vh;display:grid;place-items:center;text-align:center">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="logo" href="index.html" aria-label="RACP-IMSP — Accueil">
+      <img src="assets/logo-racp.png" width="1400" height="290" decoding="async" alt="RACP-IMSP — Réseau Alumni des Classes Préparatoires">
+    </a>
+    <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Navigation principale">
+      <ul><li><a href="index.html" class="nav-link">Accueil</a></li><li><a href="reseau.html" class="nav-link">Le réseau</a></li><li><a href="activites.html" class="nav-link">Activités</a></li><li><a href="parcours.html" class="nav-link">Parcours</a></li><li><a href="mentorat.html" class="nav-link">Mentorat</a></li><li><a href="ressources.html" class="nav-link">Ressources</a></li><li><a href="actualites.html" class="nav-link">Actualités</a></li><li><a href="adhesion.html" class="nav-link">Adhésion</a></li><li><a href="contact.html" class="nav-link">Contact</a></li></ul>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSe2sCxVMVwlTNCQUS9cnwj_UWDeEXdGaxgQbrt35Vh1rdFZog/viewform" target="_blank" rel="noopener">Adhérer</a>
+    </nav>
+  </div>
+</header>
+<main id="contenu">
+<section class="hero" style="min-height:64vh;display:grid;place-items:center;text-align:center">
   <div class="container">
     <p class="eyebrow on-dark" style="justify-content:center">Erreur 404</p>
     <h1 style="color:#fff;font-family:var(--display)">Cette page n'existe pas</h1>
-    <p class="lead" style="margin:.6rem auto 0">Le lien est peut-être erroné ou la page a été déplacée.</p>
-    <div class="cta-row" style="justify-content:center"><a class="btn btn-primary" href="index.html">Retour à l'accueil</a></div>
+    <p class="lead" style="margin:.6rem auto 1.4rem">Le lien est peut-être erroné ou la page a été déplacée. Voici quelques pistes&nbsp;:</p>
+    <div class="cta-row" style="justify-content:center;flex-wrap:wrap;gap:.6rem">
+      <a class="btn btn-primary" href="index.html">Retour à l'accueil</a>
+      <a class="btn btn-ghost-light" href="ressources.html">La bibliothèque</a>
+      <a class="btn btn-ghost-light" href="mentorat.html">Le mentorat</a>
+      <a class="btn btn-ghost-light" href="contact.html">Nous contacter</a>
+    </div>
   </div>
 </section>
-</body></html>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-racp-white.png" width="1400" height="290" decoding="async" alt="RACP-IMSP">
+        <p>Réseau Alumni des Classes Préparatoires de l'Institut de Mathématiques et de Sciences Physiques du Bénin.</p>
+        <div class="foot-soc">
+          <a href="https://www.linkedin.com/in/racp-imsp-41597937b/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+          <a href="https://www.facebook.com/profile.php?id=61579263734893" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a href="https://www.instagram.com/racp_imsp/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        </div>
+        <div class="foot-imsp"><img src="assets/logo-imsp.jpg" width="397" height="400" decoding="async" alt="Logo de l'IMSP"><span>En lien avec l'Institut de Mathématiques<br>et de Sciences Physiques (IMSP)</span></div>
+      </div>
+      <div><h4>Le réseau</h4><ul>
+        <li><a href="reseau.html">Mission &amp; gouvernance</a></li>
+        <li><a href="activites.html">Activités</a></li>
+        <li><a href="parcours.html">Parcours d'alumni</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+        <li><a href="ressources.html">Ressources</a></li>
+      </ul></div>
+      <div><h4>Mentorat</h4><ul>
+        <li><a href="mentorat.html">Le programme</a></li>
+        <li><a href="devenir-parrain.html">Devenir parrain/marraine</a></li>
+        <li><a href="devenir-filleul.html">Être accompagné·e</a></li>
+      </ul></div>
+      <div><h4>Rejoindre</h4><ul>
+        <li><a href="adhesion.html">Adhésion</a></li>
+        <li><a href="actualites.html#newsletter">Newsletter</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="mailto:racp-imsp@racp-imsp.org">racp-imsp@racp-imsp.org</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span class="js-year">2026</span> RACP-IMSP — Solidarité • Excellence • Rayonnement</span>
+      <span><a href="confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></span>
+    </div>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

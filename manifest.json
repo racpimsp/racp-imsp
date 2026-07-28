@@ -1,0 +1,15 @@
+{
+  "name": "RACP-IMSP — Réseau Alumni des Classes Préparatoires de l'IMSP",
+  "short_name": "RACP-IMSP",
+  "description": "Réseau Alumni des Classes Préparatoires de l'Institut de Mathématiques et de Sciences Physiques du Bénin : solidarité, mentorat et excellence.",
+  "lang": "fr",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#27436F",
+  "icons": [
+    { "src": "assets/favicon.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "assets/logo-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

@@ -10,14 +10,27 @@
 <meta property="og:title" content="Ressources — RACP-IMSP">
 <meta property="og:description" content="Bibliothèque en ligne du RACP-IMSP : livres et annales de concours, documents officiels et ressources vidéo en maths et physique.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:image" content="https://racp-imsp.org/assets/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://racp-imsp.org/ressources.html">
+<link rel="canonical" href="https://racp-imsp.org/ressources.html">
+<meta name="theme-color" content="#27436F">
+<link rel="apple-touch-icon" href="assets/logo-icon.png">
+<link rel="manifest" href="manifest.json">
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://www.youtube-nocookie.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Couvertures réelles de livres (page éditeur) sur les vignettes */
+  .cover-art{position:relative;overflow:hidden}
+  .cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
+  /* Couvertures vectorielles (SVG OpenStax) : afficher en entier sur fond blanc */
+  .cover-photo[src$=".svg"]{object-fit:contain;background:#fff}
+  .cover.has-photo .cover-type,.cover.has-photo .cover-ribbon{z-index:3}
+</style>
 <script>document.documentElement.className+=" js";</script>
 </head>
 <body>
@@ -25,7 +38,7 @@
 <header class="site-header">
   <div class="container nav-wrap">
     <a class="logo" href="index.html" aria-label="RACP-IMSP — Accueil">
-      <img src="assets/logo-racp.png" alt="RACP-IMSP — Réseau Alumni des Classes Préparatoires">
+      <img src="assets/logo-racp.png" width="1400" height="290" decoding="async" alt="RACP-IMSP — Réseau Alumni des Classes Préparatoires">
     </a>
     <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -76,6 +89,12 @@
       <button class="catchip" data-cat="Méthode &amp; orientation">Méthode &amp; orientation</button>
       <button class="catchip" data-cat="Documents officiels">Documents officiels</button>
     </div>
+    <div class="lib-cats" role="group" aria-label="Filtrer par année">
+      <button class="catchip active" data-niveau="all">Toutes les années</button>
+      <button class="catchip" data-niveau="1re année">1re année</button>
+      <button class="catchip" data-niveau="2e année">2e année</button>
+      <button class="catchip" data-niveau="3e année">3e année</button>
+    </div>
   </div>
 </section>
 
@@ -112,14 +131,14 @@
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="assets/logo-racp-white.png" alt="RACP-IMSP">
+        <img src="assets/logo-racp-white.png" width="1400" height="290" decoding="async" alt="RACP-IMSP">
         <p>Réseau Alumni des Classes Préparatoires de l'Institut de Mathématiques et de Sciences Physiques du Bénin.</p>
         <div class="foot-soc">
           <a href="https://www.linkedin.com/in/racp-imsp-41597937b/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
           <a href="https://www.facebook.com/profile.php?id=61579263734893" target="_blank" rel="noopener" aria-label="Facebook">f</a>
           <a href="https://www.instagram.com/racp_imsp/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
         </div>
-        <div class="foot-imsp"><img src="assets/logo-imsp.jpg" alt="Logo de l'IMSP"><span>En lien avec l'Institut de Mathématiques<br>et de Sciences Physiques (IMSP)</span></div>
+        <div class="foot-imsp"><img src="assets/logo-imsp.jpg" width="397" height="400" decoding="async" alt="Logo de l'IMSP"><span>En lien avec l'Institut de Mathématiques<br>et de Sciences Physiques (IMSP)</span></div>
       </div>
       <div><h4>Le réseau</h4><ul>
         <li><a href="reseau.html">Mission &amp; gouvernance</a></li>
@@ -137,11 +156,11 @@
         <li><a href="adhesion.html">Adhésion</a></li>
         <li><a href="actualites.html#newsletter">Newsletter</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="mailto:racp.imsp@gmail.com">racp.imsp@gmail.com</a></li>
+        <li><a href="mailto:racp-imsp@racp-imsp.org">racp-imsp@racp-imsp.org</a></li>
       </ul></div>
     </div>
     <div class="foot-bottom">
-      <span>© 2025 RACP-IMSP — Solidarité • Excellence • Rayonnement</span>
+      <span>© <span class="js-year">2026</span> RACP-IMSP — Solidarité • Excellence • Rayonnement</span>
       <span><a href="confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></span>
     </div>
   </div>

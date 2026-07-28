@@ -24,6 +24,11 @@
     a.setAttribute("rel", rel.join(" ").trim());
   });
 
+  /* Année automatique du pied de page (évite un copyright périmé) */
+  document.querySelectorAll(".js-year").forEach(function (el) {
+    el.textContent = String(new Date().getFullYear());
+  });
+
   /* Honeypot anti-spam : champ caché ignoré par les humains.
      Formspree rejette silencieusement toute soumission où il est rempli. */
   function addHoneypot(form) {
@@ -159,6 +164,9 @@
           if (p < 1) requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);
+        /* Filet de sécurité : garantit la valeur finale exacte même si l'animation
+           est interrompue (onglet en arrière-plan, rAF ralenti). */
+        setTimeout(function () { el.textContent = end.toLocaleString("fr-FR"); }, dur + 500);
         co.unobserve(el);
       });
     }, { threshold: 0.5 });
@@ -437,9 +445,15 @@
     });
     if (canaux.length) raw.canaux = canaux;
 
-    /* Disponibilité (parrain) « 1 h / mois » -> entier borné */
+    /* Disponibilité (parrain) « 1 h / mois » -> entier borné.
+       On extrait le nombre où qu'il soit dans le libellé ; « Plus de 2 h / mois »
+       est traité comme la borne supérieure (2 + 1 = 3) au lieu de retomber à 1. */
     if (table === "mentor_applications" && "dispo" in raw) {
-      raw.dispo_h = Math.min(Math.max(parseInt(raw.dispo, 10) || 1, 1), 40);
+      var dispoTxt = String(raw.dispo);
+      var dispoMatch = dispoTxt.match(/\d+/);
+      var dispoH = dispoMatch ? parseInt(dispoMatch[0], 10) : 1;
+      if (/plus/i.test(dispoTxt)) dispoH += 1;
+      raw.dispo_h = Math.min(Math.max(dispoH, 1), 40);
       delete raw.dispo;
     }
     if ("capacite" in raw) {

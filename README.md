@@ -9,7 +9,7 @@ Déployable tel quel sur **GitHub Pages**, Netlify, Vercel ou tout hébergeur de
 ---
 
 > **Sécurité.** Le durcissement appliqué (CSP, anti-XSS de l'espace coordinateur,
-> honeypot des formulaires, en-têtes serveur) est documenté dans **SECURITE.md**.
+> honeypot des formulaires, en-têtes serveur) est documenté dans **docs/SECURITE.md**.
 
 ## 1. Contenu du dossier
 
@@ -29,10 +29,12 @@ site/
 ├── mentions-legales.html   Mentions légales
 ├── styles.css              Identité visuelle (couleurs exactes du logo)
 ├── script.js               Navigation, animations, formulaires, newsletter
-├── supabase-schema.sql     Schéma back-office (phase 2)
-├── sitemap.xml             Plan du site (SEO) — remplacer VOTRE-DOMAINE
-├── robots.txt              Indexation (SEO) — remplacer VOTRE-DOMAINE
+├── manifest.json           Manifest PWA (icône mobile, theme-color)
+├── sitemap.xml             Plan du site (SEO)
+├── robots.txt              Indexation (SEO)
 ├── .nojekyll               Pour GitHub Pages
+├── LICENSE / .gitignore    Licence + fichiers de dépôt
+├── docs/                   Documentation interne (CHECKLIST, SECURITE, CORRECTIONS, schéma Supabase, Matières…)
 ├── 404.html
 ├── newsletter/
 │   └── template-newsletter.html   Gabarit e-mail réutilisable
@@ -160,7 +162,7 @@ démonstration** (données fictives) : tableau de bord, **pipeline des candidatu
 compatibilité).
 
 Pour le passer en **réel** avec Supabase :
-1. Créez un projet Supabase et importez `supabase-schema.sql`.
+1. Créez un projet Supabase et importez `docs/supabase-schema.sql`.
 2. Dans `admin/index.html`, renseignez `SUPABASE_URL` et `SUPABASE_ANON` (clé anon publique).
 3. La connexion se fait par lien e-mail (magic link) ; les vues lisent les tables
    `mentor_applications`, `mentee_applications`, `pairings`, `profiles`.
@@ -178,7 +180,7 @@ binômes) nécessite une base de données et de l'authentification. Le chemin re
 - **Supabase** (Postgres + Auth + Storage + sécurité par rôles) — offre gratuite suffisante.
 - Front identique ou migré vers **Next.js** quand le besoin grandit.
 
-Le fichier **`supabase-schema.sql`** fournit le schéma de départ (tables, statuts du pipeline
+Le fichier **`docs/supabase-schema.sql`** fournit le schéma de départ (tables, statuts du pipeline
 de mentorat calqué sur le modèle Rura, et esquisse des politiques de sécurité). Importez-le
 dans l'éditeur SQL de Supabase pour démarrer.
 
