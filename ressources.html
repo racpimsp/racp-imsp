@@ -10,7 +10,7 @@
 <meta property="og:title" content="Ressources — RACP-IMSP">
 <meta property="og:description" content="Bibliothèque en ligne du RACP-IMSP : livres et annales de concours, documents officiels et ressources vidéo en maths et physique.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:image" content="https://racp-imsp.org/assets/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +18,14 @@
 <link rel="preconnect" href="https://www.youtube-nocookie.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Couvertures réelles de livres (page éditeur) sur les vignettes */
+  .cover-art{position:relative;overflow:hidden}
+  .cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
+  /* Couvertures vectorielles (SVG OpenStax) : afficher en entier sur fond blanc */
+  .cover-photo[src$=".svg"]{object-fit:contain;background:#fff}
+  .cover.has-photo .cover-type,.cover.has-photo .cover-ribbon{z-index:3}
+</style>
 <script>document.documentElement.className+=" js";</script>
 </head>
 <body>
@@ -75,6 +83,12 @@
       <button class="catchip" data-cat="Annales &amp; concours">Annales &amp; concours</button>
       <button class="catchip" data-cat="Méthode &amp; orientation">Méthode &amp; orientation</button>
       <button class="catchip" data-cat="Documents officiels">Documents officiels</button>
+    </div>
+    <div class="lib-cats" role="group" aria-label="Filtrer par année">
+      <button class="catchip active" data-niveau="all">Toutes les années</button>
+      <button class="catchip" data-niveau="1re année">1re année</button>
+      <button class="catchip" data-niveau="2e année">2e année</button>
+      <button class="catchip" data-niveau="3e année">3e année</button>
     </div>
   </div>
 </section>
@@ -137,11 +151,11 @@
         <li><a href="adhesion.html">Adhésion</a></li>
         <li><a href="actualites.html#newsletter">Newsletter</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="mailto:racp.imsp@gmail.com">racp.imsp@gmail.com</a></li>
+        <li><a href="mailto:racp-imsp@racp-imsp.org">racp-imsp@racp-imsp.org</a></li>
       </ul></div>
     </div>
     <div class="foot-bottom">
-      <span>© 2025 RACP-IMSP — Solidarité • Excellence • Rayonnement</span>
+      <span>© <span class="js-year">2026</span> RACP-IMSP — Solidarité • Excellence • Rayonnement</span>
       <span><a href="confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></span>
     </div>
   </div>
