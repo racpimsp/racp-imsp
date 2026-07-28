@@ -1,0 +1,22 @@
+La page Mentorat
+Le mot GROW : Aussi, pour le O dans GROW 
+J'aurais plutôt mis un quelque chose comme "quelles pistes s'offrent à toi ?" au lieu de "qu'est-ce qui bloque ?"
+
+vu que le O est pour Options, je me dis qu'on devrait plutôt interroger les possibilités d'action, pas seulement les blocages
+
+
+Méthode & mental
+Organisation, hygiène de vie, gestion du stress et des notes (résultats peut-être plus explicites ici je pense) — le mindset  (et état d'esprit ou mentalité;  un mot en français quand même) du préparationnaire.
+
+je partirai plus sur rythme de vie au lieu "d'hygiène"
+
+Stratégie d'orientation
+Construire un portefeuille de concours équilibré entre rêve et projet solide.
+
+Ici placer l'adjectif après le nom et donc avoir portefeuille équilibré de concours
+
+
+Copyright périmé (ligne 266) : « © 2025 » alors qu'on est en 2026. À passer en 2026 (ou rendre l'année automatique en JS).
+
+
+<Le réseau qui relie les matheux,  physiciens et informaticiens formés à l'IMSP>
