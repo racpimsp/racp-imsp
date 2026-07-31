@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-le site # Journal des corrections & améliorations — Site RACP-IMSP
-=======
 # Journal des corrections & améliorations — Site RACP-IMSP
->>>>>>> 4deba6d7825e93572eb83fb1df5b276af63ab0d7
 
 Ce fichier recense **toutes les modifications** apportées au site après sa livraison
 initiale : corrections de bugs, retours de relecture, améliorations. À compléter au fil
@@ -13,8 +9,34 @@ Types : 🐞 Bug · ✍️ Contenu/relecture · ✨ Amélioration · 🔧 Techni
 
 ---
 
-<<<<<<< HEAD
 ## 2026-07-31
+
+### 🐞 Git — Conflits de merge commités et poussés (site cassé en production)
+- **Fichiers :** `ressources.js`, `docs/CHECKLIST.md`, `README.md`, `docs/CORRECTIONS.md`
+- **Problème :** un merge résolu à moitié a été **commité avec ses marqueurs**
+  (`<<<<<<<`, `=======`, `>>>>>>>`) puis **poussé sur `origin/Serge`**. Introduit par le
+  commit `e23064d`, propagé jusqu'à `045e74b`.
+  → `ressources.js` en **`SyntaxError` ligne 23** : le script ne s'exécutait plus,
+  la page Ressources était **entièrement vide** (ni cartes, ni compteurs, ni filtres).
+  29 conflits au total (4 dans `ressources.js`, 19 dans la CHECKLIST, 3 + 3 dans les autres).
+- **Vérification avant réparation :** comparaison des deux versants du catalogue →
+  **mêmes 29 titres des deux côtés**, aucune ressource perdue. Le côté entrant ne contenait
+  que d'anciennes versions (README long d'avant l'allègement du 28/07, CHECKLIST d'avant
+  l'audit, catalogue d'avant le nettoyage des `isNew`).
+- **Correction :** conflits résolus en gardant la version à jour ; typo « le site » retirée
+  en tête de ce journal.
+- **Vérifs :** `node --check` OK, aucun marqueur restant dans le dépôt, 54 cartes,
+  compteurs **54 · 5 · 39**, bloc « Crédits & licences » présent, 5 pages servies en 200.
+- **Suite :** l'incident révèle l'absence de garde-fou à 4 développeurs → convention de
+  branches, relecture avant fusion et vérification automatique à décider en réunion
+  (voir [`ROADMAP.md`](ROADMAP.md) § 0 et § 4.3).
+
+### 📄 Documentation — Ajout de `docs/ROADMAP.md`
+- Feuille de route d'équipe pour la réunion du 2026-08-01 : état vérifié du site,
+  points bloquants, priorités P0→P3, **répartition en 4 lots sans recouvrement de
+  fichiers** (pour éviter que l'incident ci-dessus se reproduise), décisions à trancher
+  (hébergeur, Formspree/Supabase, convention Git, mode démo), dette technique et
+  ordre du jour. Indexée dans le README.
 
 ### 🔎 Audit complet du site + refonte de `docs/CHECKLIST.md`
 - **Audit (vérifié dans le code, pas de mémoire) :** 18 pages servies en 200 en local
@@ -96,8 +118,6 @@ Types : 🐞 Bug · ✍️ Contenu/relecture · ✨ Amélioration · 🔧 Techni
 - **Exo7 en `http://`** : `exo7.emath.fr` n'a pas de version HTTPS (testé, aucune réponse) —
   lien fonctionnel mais susceptible d'un avertissement navigateur.
 
-=======
->>>>>>> 4deba6d7825e93572eb83fb1df5b276af63ab0d7
 ## 2026-07-28
 
 ### 🔧 Structure — Réorganisation du dépôt (bon repo)
@@ -109,15 +129,11 @@ Types : 🐞 Bug · ✍️ Contenu/relecture · ✨ Amélioration · 🔧 Techni
   RACP-IMSP, tous droits réservés — cohérent avec les mentions légales).
 - **`robots.txt`** : ajout de `Disallow: /docs/` (docs non indexés par Google).
 - **Supprimé** : `observation.txt` (retours déjà appliqués).
-<<<<<<< HEAD
 - **README allégé** (~190 → ~65 lignes) : retrait de l'arborescence manuelle et des how-to
   détaillés (qui faisaient doublon avec `docs/CHECKLIST.md` et `docs/MENTORAT-SETUP.md`).
   Le README garde l'essentiel (projet · lancer · déployer · organisation) + une **table
   d'index vers `docs/`**. Ajouts : **capture d'écran de l'accueil** (`docs/apercu-accueil.jpg`),
   ligne **« Sections du site »**, et **emplacement du lien « Site en ligne »** (à remplir au déploiement).
-=======
-- **README** : références et arborescence mises à jour (chemins `docs/…`).
->>>>>>> 4deba6d7825e93572eb83fb1df5b276af63ab0d7
 - **Mémoire** : le pointeur du journal passe à `docs/CORRECTIONS.md`.
 
 ### ✨ Page 404 refondue + typographie des guillemets (lot C)

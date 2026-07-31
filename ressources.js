@@ -5,12 +5,9 @@
    niveau: "1re année" | "2e année" | "3e année" | "Toutes années"  (= filtre Niveau, structure IMSP)
    cover:  URL d'une image de couverture (facultatif) -> affichée sur la vignette
    isbn:   ISBN-13 (facultatif, pour les livres)
-<<<<<<< HEAD
    credit: OBLIGATOIRE si le fichier est hébergé sur le site sous licence Creative Commons.
            {auteur, licence, licenceUrl, source, note} -> affiché dans « Crédits & licences »
            en bas de page. Sans ce champ, l'attribution exigée par la licence manquerait.
-=======
->>>>>>> 4deba6d7825e93572eb83fb1df5b276af63ab0d7
    featured:true -> apparaît dans « Sélection de l'équipe »
    isNew:true    -> apparaît dans « Nouveautés »
    Vidéo: renseignez "yt" (id YouTube, 11 caractères) pour la lecture intégrée.
@@ -20,7 +17,6 @@ const DUNOD_COVER = isbn => `https://www.dunod.com/sites/default/files/styles/pr
 
 const LIB = [
   /* ---- Livres MPSI (1re année, maths-physique / MP2I) ---- */
-<<<<<<< HEAD
   {type:"livre", cat:"Mathématiques", niveau:"Toutes années", title:"Maths MPSI-MP2I — Tout-en-un", author:"C. Deschamps · Dunod (J'intègre)", isbn:"9782100862016", featured:true,
    desc:"Cours complet et exercices corrigés couvrant tout le programme de mathématiques de 1re année (MPSI/MP2I). 7e édition.", url:"https://www.dunod.com/prepas-concours/maths-mpsi-mp2i-tout-en-un-1", cover:DUNOD_COVER("9782100862016")},
   {type:"livre", cat:"Mathématiques", niveau:"Toutes années", title:"Maths MPSI-MP2I — Méthodes et exercices", author:"J.-M. Monier · Dunod", isbn:"9782100864621",
@@ -76,59 +72,6 @@ const LIB = [
   {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"Modern C — J. Gustedt", author:"Jens Gustedt · INRIA",
    desc:"Programmation en langage C moderne (norme récente), livre gratuit officiel. En anglais.", url:"https://gustedt.gitlabpages.inria.fr/modern-c/"},
   {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"The Feynman Lectures on Physics", author:"R. Feynman · Caltech",
-=======
-  {type:"livre", cat:"Mathématiques", niveau:"Toutes années", title:"Maths MPSI-MP2I — Tout-en-un", author:"C. Deschamps · Dunod (J'intègre)", isbn:"9782100862016", featured:true, isNew:true,
-   desc:"Cours complet et exercices corrigés couvrant tout le programme de mathématiques de 1re année (MPSI/MP2I). 7e édition.", url:"https://www.dunod.com/prepas-concours/maths-mpsi-mp2i-tout-en-un-1", cover:DUNOD_COVER("9782100862016")},
-  {type:"livre", cat:"Mathématiques", niveau:"Toutes années", title:"Maths MPSI-MP2I — Méthodes et exercices", author:"J.-M. Monier · Dunod", isbn:"9782100864621", isNew:true,
-   desc:"Les méthodes types et de nombreux exercices corrigés, en complément du cours (MPSI/MP2I). 6e édition.", url:"https://www.dunod.com/prepas-concours/maths-mpsi-mp2i-methodes-et-exercices-0", cover:DUNOD_COVER("9782100864621")},
-  {type:"livre", cat:"Mathématiques", niveau:"Toutes années", title:"Maths — Exercices incontournables MPSI-MP2I", author:"M. Bages · Dunod", isbn:"9782100828845", isNew:true,
-   desc:"Les exercices classiques des concours, résolus pas à pas, triés par thème et difficulté (MPSI/MP2I). 5e édition.", url:"https://www.dunod.com/prepas-concours/maths-exercices-incontournables-mpsi-mp2i", cover:DUNOD_COVER("9782100828845")},
-  {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"Physique tout-en-un MPSI-MP2I", author:"B. Salamito, M.-N. Sanz · Dunod", isbn:"9782100879229", featured:true, isNew:true,
-   desc:"Tout le cours de physique de 1re année, avec méthodes, exercices corrigés et programmes Python (MPSI/MP2I). 3e édition.", url:"https://www.dunod.com/prepas-concours/physique-tout-en-un-mpsi-mp2i", cover:DUNOD_COVER("9782100879229")},
-  {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"Chimie tout-en-un MPSI", author:"B. Fosset · Dunod", isbn:"9782100864638", isNew:true,
-   desc:"Tout le cours de chimie de MPSI, avec méthodes et exercices corrigés. 3e édition.", url:"https://www.dunod.com/prepas-concours/chimie-tout-en-un-mpsi-1", cover:DUNOD_COVER("9782100864638")},
-
-  /* ---- Livres PCSI (1re année, physique-chimie) ---- */
-  {type:"livre", cat:"Mathématiques", niveau:"Toutes années", title:"Maths PCSI — Tout-en-un", author:"C. Deschamps · Dunod (J'intègre)", isbn:"9782100863952", featured:true, isNew:true,
-   desc:"Cours complet et exercices corrigés couvrant tout le programme de mathématiques de PCSI. 2e édition.", url:"https://www.dunod.com/prepas-concours/maths-pcsi-tout-en-un-0", cover:DUNOD_COVER("9782100863952")},
-  {type:"livre", cat:"Mathématiques", niveau:"Toutes années", title:"Maths PCSI-PTSI — Méthodes et exercices", author:"J.-M. Monier · Dunod", isbn:"9782100862429", isNew:true,
-   desc:"Méthodes et exercices corrigés de mathématiques pour les filières PCSI et PTSI. 7e édition.", url:"https://www.dunod.com/prepas-concours/maths-pcsi-ptsi-methodes-et-exercices-2", cover:DUNOD_COVER("9782100862429")},
-  {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"Physique tout-en-un PCSI", author:"S. Cardini, B. Salamito · Dunod", isbn:"9782100864652", featured:true, isNew:true,
-   desc:"Tout le cours de physique de PCSI, avec méthodes, exercices corrigés et programmes Python. 7e édition.", url:"https://www.dunod.com/prepas-concours/physique-tout-en-un-pcsi-0", cover:DUNOD_COVER("9782100864652")},
-  {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"Chimie tout-en-un PCSI", author:"B. Fosset · Dunod", isbn:"9782100864645", isNew:true,
-   desc:"Tout le cours de chimie de PCSI, avec méthodes et exercices corrigés (la chimie pèse davantage en PCSI).", url:"https://www.dunod.com/prepas-concours/chimie-tout-en-un-pcsi-3", cover:DUNOD_COVER("9782100864645")},
-
-  /* ---- Livres communs (tronc commun, plusieurs filières) ---- */
-  {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"Sciences industrielles pour l'ingénieur — Tout-en-un", author:"J.-D. Mosser · Dunod", isbn:"9782100828739", isNew:true,
-   desc:"Tout le cours de sciences industrielles de l'ingénieur (SII) de 1re année, commun MPSI/MP2I/PCSI.", url:"https://www.dunod.com/prepas-concours/sciences-industrielles-pour-ingenieur-mpsi-mp2i-pcsi-tout-en-un", cover:DUNOD_COVER("9782100828739")},
-  {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"Informatique avec Python — Méthodes et exercices", author:"J.-N. Beury · Dunod", isbn:"9782100879267", isNew:true,
-   desc:"Méthodes et exercices corrigés d'informatique (Python) du tronc commun, communs à toutes les filières.", url:"https://www.dunod.com/prepas-concours/informatique-avec-python-methodes-et-exercices-mpsi-pcsi-ptsi-mp-pc-psi-pt-tsi-tpc-0", cover:DUNOD_COVER("9782100879267")},
-
-  /* ---- Annales & ressources en ligne (gratuites) ---- */
-  {type:"doc", cat:"Annales & concours", niveau:"Toutes années", title:"Annales blanches 2025 — Maths & Physique", author:"RACP-IMSP · PDF", featured:true, isNew:true,
-   desc:"Sujet d'entraînement (4 h) en maths et physique, avec modalités. Exemple fictif à remplacer par vos vrais sujets.", url:"assets/docs/annales-blanches-2025.pdf"},
-  {type:"doc", cat:"Annales & concours", niveau:"Toutes années", title:"Doc Solus — annales corrigées", author:"doc-solus.fr", featured:true, isNew:true,
-   desc:"Énoncés et corrigés des concours CCINP, Centrale-Supélec, Mines-Ponts et Polytechnique.", url:"https://www.doc-solus.fr/"},
-  {type:"doc", cat:"Annales & concours", niveau:"Toutes années", title:"Bibmath — cours & exercices CPGE", author:"bibmath.net", isNew:true,
-   desc:"Cours, exercices et annales de math sup / math spé (MPSI, PCSI, MP, PC).", url:"https://www.bibmath.net/"},
-  {type:"doc", cat:"Annales & concours", niveau:"Toutes années", title:"Maths-France", author:"maths-france.fr", isNew:true,
-   desc:"Cours et exercices détaillés de MPSI et MP, librement accessibles (J.-L. Rouget).", url:"https://www.maths-france.fr/"},
-
-  /* ---- Ressources universitaires en accès libre (gratuites & légales, PDF directs) ---- */
-  {type:"doc", cat:"Mathématiques", niveau:"Toutes années", title:"Exo7 — cours & exercices de maths", author:"exo7.emath.fr", featured:true, isNew:true,
-   desc:"Cours et exercices corrigés de mathématiques (niveau licence) : algèbre, analyse, topologie… En accès libre.", url:"http://exo7.emath.fr/"},
-  {type:"livre", cat:"Mathématiques", niveau:"3e année", title:"Algebraic Topology — A. Hatcher", author:"Allen Hatcher · Cornell", isNew:true,
-   desc:"Manuel de référence de topologie algébrique, en accès libre (PDF officiel de l'auteur). En anglais.", url:"https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"},
-  {type:"livre", cat:"Mathématiques", niveau:"3e année", title:"Introduction to Statistical Learning (ISLR)", author:"James, Witten, Hastie, Tibshirani", featured:true, isNew:true,
-   desc:"La référence d'apprentissage statistique (data science), PDF gratuit officiel. En anglais.", url:"https://www.statlearning.com/", cover:"assets/img/livres/islr-cover.webp"},
-  {type:"livre", cat:"Mathématiques", niveau:"3e année", title:"The Elements of Statistical Learning (ESL)", author:"Hastie, Tibshirani, Friedman", isNew:true,
-   desc:"Référence avancée en machine learning et data mining, PDF gratuit officiel. En anglais.", url:"https://hastie.su.domains/ElemStatLearn/", cover:"assets/img/livres/esl-cover.jpg"},
-  {type:"livre", cat:"Physique & sciences", niveau:"3e année", title:"Algorithms — J. Erickson", author:"Jeff Erickson · Illinois", isNew:true,
-   desc:"Manuel complet d'algorithmique et de complexité, en accès libre (PDF officiel). En anglais.", url:"https://jeffe.cs.illinois.edu/teaching/algorithms/"},
-  {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"Modern C — J. Gustedt", author:"Jens Gustedt · INRIA", isNew:true,
-   desc:"Programmation en langage C moderne (norme récente), livre gratuit officiel. En anglais.", url:"https://gustedt.gitlabpages.inria.fr/modern-c/"},
-  {type:"livre", cat:"Physique & sciences", niveau:"Toutes années", title:"The Feynman Lectures on Physics", author:"R. Feynman · Caltech", isNew:true,
->>>>>>> 4deba6d7825e93572eb83fb1df5b276af63ab0d7
    desc:"Les célèbres cours de physique de Feynman, en accès libre : mécanique, électromagnétisme, quantique. En anglais.", url:"https://www.feynmanlectures.caltech.edu/"},
 
   /* ---- Fondamentaux 1re & 2e année (accès libre) ---- */
@@ -172,7 +115,6 @@ const LIB = [
    desc:"La recherche scientifique française vulgarisée par le CNRS, en formats courts.", url:"https://www.youtube.com/@ZestedeScience", yt:""},
   {type:"video", cat:"Méthode & orientation", niveau:"Toutes années", title:"Hygiène Mentale", author:"Esprit critique & méthode",
    desc:"Raisonner, vérifier l'information et structurer sa pensée — utile au-delà des concours.", url:"https://www.youtube.com/@HygieneMentale", yt:""},
-<<<<<<< HEAD
   {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"Passe-science", author:"Chaîne YouTube",
    desc:"Physique, mathématiques et informatique en formats longs et rigoureux, proches du niveau prépa.", url:"https://www.youtube.com/@PasseScience", yt:""},
   {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"e-penser", author:"Bruce Benamran",
@@ -186,21 +128,6 @@ const LIB = [
   {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"MIT OpenCourseWare", author:"MIT",
    desc:"Cours magistraux du MIT en accès libre : maths, physique, informatique. En anglais.", url:"https://www.youtube.com/@mitocw", yt:""},
   {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"CS50 — Harvard", author:"Harvard University",
-=======
-  {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"Passe-science", author:"Chaîne YouTube", isNew:true,
-   desc:"Physique, mathématiques et informatique en formats longs et rigoureux, proches du niveau prépa.", url:"https://www.youtube.com/@PasseScience", yt:""},
-  {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"e-penser", author:"Bruce Benamran", isNew:true,
-   desc:"Concepts et histoire de la physique, expliqués avec clarté et pédagogie.", url:"https://www.youtube.com/@epenser1", yt:""},
-  {type:"video", cat:"Méthode & orientation", niveau:"Toutes années", title:"La Tronche en Biais", author:"Thomas C. Durand · zététique", isNew:true,
-   desc:"Esprit critique et zététique : raisonner juste et déjouer les biais cognitifs (prix Diderot).", url:"https://www.youtube.com/c/TroncheEnBiais-Zetetique", yt:""},
-  {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"Emmanuel Djegou (FR)", author:"IA · statistiques · data science", isNew:true,
-   desc:"Intelligence artificielle, statistiques et data science rendues accessibles par des analogies concrètes.", url:"https://www.youtube.com/@EmmanuelDjegouFrench", yt:""},
-  {type:"video", cat:"Mathématiques", niveau:"3e année", title:"StatQuest", author:"Josh Starmer", isNew:true,
-   desc:"Statistiques et machine learning expliqués clairement, étape par étape. En anglais.", url:"https://www.youtube.com/@statquest", yt:""},
-  {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"MIT OpenCourseWare", author:"MIT", isNew:true,
-   desc:"Cours magistraux du MIT en accès libre : maths, physique, informatique. En anglais.", url:"https://www.youtube.com/@mitocw", yt:""},
-  {type:"video", cat:"Physique & sciences", niveau:"Toutes années", title:"CS50 — Harvard", author:"Harvard University", isNew:true,
->>>>>>> 4deba6d7825e93572eb83fb1df5b276af63ab0d7
    desc:"Le cours d'introduction à l'informatique de Harvard (CS50), gratuit et réputé. En anglais.", url:"https://www.youtube.com/@cs50", yt:""},
 
   /* ---- Méthode & orientation (à venir) ---- */
@@ -233,7 +160,6 @@ const LIB = [
   const CATCLASS={'Mathématiques':'c-math','Physique & sciences':'c-phys','Annales & concours':'c-ann','Méthode & orientation':'c-meth','Documents officiels':'c-off'};
   const esc=s=>String(s==null?'':s).replace(/"/g,'&quot;');
 
-<<<<<<< HEAD
   /* --- Stats d'en-tête (accès libre = tout sauf les livres commerciaux Dunod) ---
      NB : on teste le domaine de l'éditeur, pas le type. Beaucoup de « livres »
      sont des manuels gratuits (OpenStax, ISLR, Hatcher, Feynman…) : les exclure
@@ -241,12 +167,6 @@ const LIB = [
   (function stats(){
     const cats=new Set(LIB.map(r=>r.cat));
     const free=LIB.filter(r=>r.url && !r.soon && !/dunod\.com/.test(r.url)).length;
-=======
-  /* --- Stats d'en-tête (accès libre = hors livres commerciaux) --- */
-  (function stats(){
-    const cats=new Set(LIB.map(r=>r.cat));
-    const free=LIB.filter(r=>r.url && !r.soon && r.type!=='livre').length;
->>>>>>> 4deba6d7825e93572eb83fb1df5b276af63ab0d7
     const set=(id,n)=>{const el=document.getElementById(id);if(el)el.setAttribute('data-count',n);};
     set('stat-total',LIB.length); set('stat-cats',cats.size); set('stat-free',free);
   })();
