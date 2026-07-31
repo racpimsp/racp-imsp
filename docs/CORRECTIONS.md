@@ -1,4 +1,4 @@
-# Journal des corrections & améliorations — Site RACP-IMSP
+le site # Journal des corrections & améliorations — Site RACP-IMSP
 
 Ce fichier recense **toutes les modifications** apportées au site après sa livraison
 initiale : corrections de bugs, retours de relecture, améliorations. À compléter au fil
@@ -8,6 +8,88 @@ de l'eau (entrée la plus récente en haut).
 Types : 🐞 Bug · ✍️ Contenu/relecture · ✨ Amélioration · 🔧 Technique · 📄 Config.
 
 ---
+
+## 2026-07-31
+
+### 🔎 Audit complet du site + refonte de `docs/CHECKLIST.md`
+- **Audit (vérifié dans le code, pas de mémoire) :** 18 pages servies en 200 en local
+  (404 comprise) ; **aucun lien interne cassé** ; **54 URL externes testées → toutes valides**
+  (Feynman 403 et LinkedIn 999 = anti-bot) ; tous les assets référencés existent ;
+  **toutes les `<img>` ont un `alt`** ; CSP **identique sur les 18 pages** ; `admin/` triplement
+  protégé du référencement (meta `noindex` + `robots.txt` + `X-Robots-Tag`) et absent des
+  pieds de page ; `og:image` absolue et canonique sur les 17 pages publiques ; e-mail et
+  domaine à jour partout ; bibliothèque = **54 entrées, 0 doublon** (URL et titres), `cat` et
+  `niveau` renseignés sur 100 % des entrées.
+- **Restes bloquants confirmés :** 4 endpoints `VOTRE_ID_…` (Formspree), mentions légales
+  (responsable de publication + hébergeur), contenus de démonstration, hébergement.
+- **CHECKLIST refondue** : nouvelle section **0 « Où en est-on ? »** (tableau d'état),
+  cases **[x]** pour tout ce qui est vérifié fait (e-mail, domaine, og:image, admin, SEO),
+  corrections des renvois périmés (**`LIB` est dans `ressources.js`**, pas `ressources.html` ;
+  plus de `racp.imsp@gmail.com` ni de `VOTRE-DOMAINE` à chercher), ajout du **4ᵉ article de
+  démonstration** (`article-annuaire.html`, oublié), du champ **`niveau` obligatoire** dans la
+  procédure d'ajout de ressource, du PDF d'annales factice, des tableaux d'emplacements
+  Formspree (fichier + ligne), et d'une section **9 « anomalies »**.
+
+### ✨ Bibliothèque — 1er PDF hébergé localement (Algorithms, J. Erickson) + bloc « Crédits & licences »
+- **Fichiers :** `assets/docs/algorithms-jeff-erickson.pdf` (nouveau, 23,9 Mo), `ressources.js`,
+  `ressources.html`, `styles.css`
+- **Contexte :** revue des licences de toutes les ressources gratuites du catalogue pour savoir
+  lesquelles peuvent être **réhébergées** (et pas seulement liées). Résultat vérifié à la source :
+  - **Réhébergeables :** OpenStax ×5 (**CC BY-NC-SA 4.0** — vérifié via l'API OpenStax, ce ne sont
+    **pas** des CC BY comme on pourrait le croire), **Algorithms — J. Erickson (CC BY 4.0)**,
+    Modern C (CC BY-NC-ND 4.0), supports MIT OCW (CC BY-NC-SA 4.0).
+  - **Interdits :** **Hatcher** (notice Cambridge UP : copies « for noncommercial *personal use* »,
+    « all other rights reserved » → pas de miroir), **ISLR** (« All Rights Reserved », Springer),
+    **ESL** (Springer, aucune licence de redistribution), **Feynman** (Caltech, lecture en ligne
+    seulement), les **11 Dunod**, et doc-solus / bibmath / maths-france.
+  - **Indéterminé :** **Exo7** — aucune mention de licence trouvée (site sans HTTPS, certificat
+    auto-signé). À ne pas héberger sans accord écrit des auteurs.
+- **Décision :** ne **pas** copier les gros manuels — les 5 OpenStax pèsent **310 Mo** (50 à 78 Mo
+  pièce) contre 6,1 Mo pour tout le site ; au-delà de 50 Mo Git avertit, à 100 Mo il bloque, et
+  télécharger 78 Mo en connexion mobile est pire que la lecture en ligne. Le lien reste meilleur
+  (version à jour, corrections des auteurs).
+- **Retenu :** **Algorithms — J. Erickson** seul (23,9 Mo, **CC BY 4.0**, la licence la plus souple ;
+  l'auteur écrit explicitement *« Anyone is welcome to download, print, use, copy, and/or
+  distribute »* en demandant un lien retour). L'entrée pointe désormais sur le PDF local
+  (`url:"assets/docs/algorithms-jeff-erickson.pdf"`), la description mentionne le poids.
+- **Attribution (exigée par CC BY) :** nouveau champ **`credit:{auteur, licence, licenceUrl,
+  source, note}`** et nouveau bloc **« Crédits & licences »** en bas de la page Ressources,
+  **généré automatiquement** depuis les entrées qui portent ce champ (`#lib-credits`) : nom de
+  l'auteur, lien `rel="license"` vers la licence, lien vers la source d'origine, mention
+  « copie non modifiée ». Ajouter `credit:{…}` à une future entrée suffit à l'y faire figurer.
+- **Vérifs :** PDF valide (`%PDF-1.5`, `%%EOF` présent, 23,9 Mo servi en `application/pdf`),
+  bloc de crédits rendu avec ses 2 liens, 54 cartes, compteurs inchangés (**54 · 5 · 39** —
+  le PDF local reste compté en accès libre), PDF non exclu par `.gitignore`.
+- **⚠️ Conséquence :** le site passe de **6,1 Mo à 30 Mo**. Reste très en dessous des limites
+  GitHub Pages (1 Go, 100 Mo/fichier), mais ne pas répéter l'opération sans raison.
+
+### 🐞 Bibliothèque — Compteur « En accès libre » faussé + badge « Nouveau » banalisé
+- **Fichier :** `ressources.js`
+- **Compteur (l. 159) :** le bandeau affichait **28 en accès libre** au lieu de **39**.
+  Le calcul écartait tout ce qui est `type:"livre"` (règle « hors livres commerciaux »),
+  or les **11 manuels gratuits** (OpenStax ×5, ISLR, ESL, Hatcher, Feynman, Modern C,
+  Erickson) reclassés en « livre » le 28/07 tombaient dans cette exclusion.
+  **Correction :** le test porte désormais sur le **domaine de l'éditeur**
+  (`!/dunod\.com/.test(r.url)`) et non sur le type — un manuel gratuit reste donc compté
+  comme libre quel que soit son type. Commentaire explicatif ajouté au-dessus.
+  *(Le « 39 » noté le 28/07 était juste sur le fond ; c'est l'affichage qui avait dérivé
+  après le reclassement des manuels.)*
+- **`isNew:true` :** présent sur **39 des 54** ressources → l'étagère « Nouveautés » recopiait
+  presque tout le catalogue et le badge ne signalait plus rien. **Retiré de 29 entrées**,
+  conservé sur le **dernier lot ajouté** (les 10 fondamentaux 1re/2e année du 27/07 :
+  OpenStax ×5, MIT OCW ×4, Khan Academy).
+- **Vérifié dans le navigateur** (Chrome, site servi en local) : bandeau **54 · 5 · 39**,
+  54 cartes affichées, étagères « Sélection de l'équipe » (13) et « Nouveautés » (10),
+  4 rubans « Bientôt », filtres Type (24/21/9) et Niveau (4/6/5) inchangés, **aucune erreur
+  console** côté site.
+- **Rappel ajouté à la CHECKLIST** (sections 7 et 9) : à chaque nouvel ajout, poser
+  `isNew:true` sur les nouvelles entrées **et le retirer des précédentes**.
+
+### 🐞 Anomalies restantes (non corrigées — section 9 de la CHECKLIST)
+- **`docs/Matières.txt`** : supprimé du disque mais toujours suivi par Git (suppression non
+  commitée), et encore référencé dans `README.md` et ce journal.
+- **Exo7 en `http://`** : `exo7.emath.fr` n'a pas de version HTTPS (testé, aucune réponse) —
+  lien fonctionnel mais susceptible d'un avertissement navigateur.
 
 ## 2026-07-28
 

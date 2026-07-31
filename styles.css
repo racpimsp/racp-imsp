@@ -362,6 +362,15 @@ html.js .reveal.in{opacity:1;transform:none}
 .lib-add{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:2.2rem;padding:1.3rem 1.5rem;border:1px dashed var(--line-strong);border-radius:var(--r);background:var(--paper)}
 .lib-add p{margin:0;color:var(--muted)}
 
+/* crédits & licences (attribution des fichiers hébergés sous Creative Commons) */
+.lib-credits{margin-top:2.2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+.lib-credits .title{font-size:1.15rem;margin:0 0 .4rem}
+.lib-credits>p{margin:0 0 .9rem;font-size:.92rem}
+.lib-credits-list{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+.lib-credits-list li{font-size:.9rem;line-height:1.55;color:var(--muted);padding-left:.9rem;border-left:2px solid var(--line-strong)}
+.lib-credits-list b{color:var(--navy)}
+.lib-credits-list .muted{display:block;font-size:.85rem;opacity:.85}
+
 /* video modal */
 .lib-modal{position:fixed;inset:0;z-index:2000;background:rgba(8,18,32,.82);display:grid;place-items:center;padding:1.2rem}
 .lib-modal[hidden]{display:none}
